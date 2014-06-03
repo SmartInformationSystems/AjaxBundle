@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartSystems\AjaxBundle\Controller;
+namespace SmartInformationSystems\AjaxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -215,7 +215,7 @@ class AjaxController extends Controller
         return
             method_exists($this, $method)
             &&
-            $this->annotationExists($method, 'SmartSystems\AjaxBundle\Annotations\AjaxAction')
+            $this->annotationExists($method, 'SmartInformationSystems\AjaxBundle\Annotations\AjaxAction')
         ;
     }
 
