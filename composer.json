@@ -1,0 +1,27 @@
+{
+    "name" : "SmartInformationSystems/ajax-bundle",
+    "description" : "Ajax bundle",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "YK115",
+        "email" : "info@smart-systems.ru"
+    }],
+    "keywords" : [
+        "object history"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : { "SmartInformationSystems\\AjaxBundle" : "" }
+    },
+    "target-dir" : "SmartInformationSystems/AjaxBundle",
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "1.0-dev"
+        }
+    }
+}
+
