@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartSystems\AjaxBundle\Annotations;
+namespace SmartInformationSystems\AjaxBundle\Annotations;
 
 /**
  * Аннотация для ajax-экшена.
