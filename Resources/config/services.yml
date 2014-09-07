@@ -1,0 +1,6 @@
+services:
+    preexecute.listener:
+        class: SmartInformationSystems\AjaxBundle\Listener\PreExecuteListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
