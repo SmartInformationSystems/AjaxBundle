@@ -28,34 +28,12 @@ class AjaxController extends Controller
     private $annotationReader = NULL;
 
     /**
-     * Отправитель писем.
-     *
-     * @var array
-     */
-    private $emailFrom = array('info@example.com', 'From example');
-
-    /**
      * Конструктор.
      *
      */
     public function __construct()
     {
         $this->annotationReader = new AnnotationReader();
-    }
-
-    /**
-     * Устанавливает отправителя писем.
-     *
-     * @param string $email Адрес отправителя
-     * @param string $name Имя отправителя
-     *
-     * @return AjaxController
-     */
-    public function setEmailFrom($email, $name)
-    {
-        $this->emailFrom = array($email, $name);
-
-        return $this;
     }
 
     /**
@@ -265,48 +243,6 @@ class AjaxController extends Controller
         parent::setContainer($container);
 
         $this->preExecute();
-    }
-
-    /**
-     * Отправка письма.
-     *
-     * @param string $email Кому
-     * @param string $template Шаблон
-     * @param array $templateVars Переменные шаблона
-     *
-     * @return int
-     */
-    protected function sendEmail($email, $template, array $templateVars = array())
-    {
-        $templating = $this->get('templating');
-
-        $message = \Swift_Message::newInstance()
-            ->setSubject(
-                $templating->render(
-                    $template . '/subject.text.twig',
-                    $templateVars
-                )
-            )
-            ->setFrom($this->emailFrom[0], $this->emailFrom[1])
-            ->setTo($email);
-
-        $templateVars = array_merge(
-            $templateVars,
-            array(
-                '_subject' => $message->getSubject(),
-            )
-        );
-
-        $message->setBody(
-            $templating->render(
-                $template . '/body.html.twig',
-                $templateVars
-            ),
-            'text/html',
-            'utf8'
-        );
-
-        return $this->get('mailer')->send($message);
     }
 
     /**
