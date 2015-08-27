@@ -110,6 +110,18 @@ class AjaxController extends Controller
     }
 
     /**
+     * Возвращает ajax-ответ при логической ошибке.
+     *
+     * @param \Exception $e
+     *
+     * @return JsonResponse
+     */
+    protected function ajaxErrorResponse(\Exception $e)
+    {
+        return $this->ajaxResponse(FALSE, '', $e->getMessage());
+    }
+
+    /**
      * Возвращает прототип json-ответа.
      *
      *
