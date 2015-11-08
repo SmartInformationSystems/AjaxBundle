@@ -113,12 +113,13 @@ class AjaxController extends Controller
      * Возвращает ajax-ответ при логической ошибке.
      *
      * @param \Exception $e
+     * @param array $data Дополнительные данные
      *
      * @return JsonResponse
      */
-    protected function ajaxErrorResponse(\Exception $e)
+    protected function ajaxErrorResponse(\Exception $e, $data = array())
     {
-        return $this->ajaxResponse(FALSE, '', $e->getMessage());
+        return $this->ajaxResponse(FALSE, '', $e->getMessage(), $data);
     }
 
     /**
