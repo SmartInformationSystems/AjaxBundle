@@ -5,6 +5,7 @@ namespace SmartInformationSystems\AjaxBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
@@ -26,6 +27,13 @@ class AjaxController extends Controller
      * @var AnnotationReader
      */
     private $annotationReader = NULL;
+
+    /**
+     * Запрос.
+     *
+     * @var Request
+     */
+    private $request;
 
     /**
      * Конструктор.
@@ -229,10 +237,13 @@ class AjaxController extends Controller
     /**
      * Вызывается перед каждым действием.
      *
+     * @param Request $request
+     *
+     * @return void
      */
-    protected function preExecute()
+    protected function preExecute(Request $request)
     {
-        if ($this->isAjaxAction($this->getActionName()) && !$this->getRequest()->isXmlHttpRequest()) {
+        if ($this->isAjaxAction($this->getActionName($request)) && (!$request || !$request->isXmlHttpRequest())) {
             throw $this->createNotFoundException('Only ajax request available for this action.');
         }
     }
@@ -240,22 +251,14 @@ class AjaxController extends Controller
     /**
      * Возвращает название текущего Action.
      *
+     * @param Request $request
+     *
      * @return string
      */
-    protected function getActionName()
+    protected function getActionName(Request $request)
     {
-        $arr = explode('::', $this->getRequest()->attributes->get('_controller'));
+        $arr = explode('::', $request->attributes->get('_controller'));
         return preg_replace('/Action$/', '', end($arr));
-    }
-
-    /**
-     * {@inheritdoc)
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        parent::setContainer($container);
-
-        $this->preExecute();
     }
 
     /**

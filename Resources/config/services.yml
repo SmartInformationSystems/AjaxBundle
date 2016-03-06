@@ -1,5 +1,6 @@
 services:
     preexecute.listener:
         class: SmartInformationSystems\AjaxBundle\Listener\PreExecuteListener
+        arguments: ['@request_stack']
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

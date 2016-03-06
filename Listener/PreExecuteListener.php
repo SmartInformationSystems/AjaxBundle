@@ -14,10 +14,9 @@ class PreExecuteListener
             if (!empty($controllers[0])) {
                 $controller = array_shift($controllers);
                 if (method_exists($controller, 'preExecute')) {
-                    $controller->preExecute();
+                    $controller->preExecute($event->getRequest());
                 }
             }
         }
     }
 }
-
