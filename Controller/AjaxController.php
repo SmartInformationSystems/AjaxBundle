@@ -19,7 +19,7 @@ class AjaxController extends Controller
      *
      * @var string
      */
-    private $translationDomain = 'messages';
+    protected $translationDomain = 'messages';
 
     /**
      * Обработчик аннотаций.
